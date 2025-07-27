@@ -19,39 +19,58 @@ function getHumanChoice() {
   );
 }
 
-let humanScore = 0;
-let computerScore = 0;
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
 
-function humanWin() {
-  console.log("Victory! You've beaten the computer!");
-  humanScore++;
-}
-
-function computerWin() {
-  console.log("Oops... You lost!");
-  computerScore++;
-}
-
-function playRound(humanChoice, computerChoice) {
-  let humanChoiceLC = humanChoice.toLowerCase();
-  // Computer choice is already lowercased in getComputerChoice function
-
-  if (humanChoiceLC === computerChoice) {
-    console.log("It's a tie!");
+  function humanWin() {
+    console.log("Victory! You've beaten the computer!");
+    humanScore++;
   }
 
-  switch (humanChoiceLC) {
-    case "rock":
-      // The computer choosing rock is covered in a tie section, so ternary operator is used
-      computerChoice === "scissors" ? humanWin() : computerWin();
-      break;
-    case "paper":
-      computerChoice === "rock" ? humanWin() : computerWin();
-      break;
-    case "scissors":
-      computerChoice === "paper" ? humanWin() : computerWin();
-      break;
-    default:
-      console.log("Hm... your choice wasn't recognized.");
+  function computerWin() {
+    console.log("Oops... You lost!");
+    computerScore++;
   }
+
+  function playRound(humanChoice, computerChoice) {
+    let humanChoiceLC = humanChoice.toLowerCase();
+    // Computer choice is already lowercased in getComputerChoice function
+
+    if (humanChoiceLC === computerChoice) {
+      console.log("It's a tie!");
+      return;
+    }
+
+    switch (humanChoiceLC) {
+      case "rock":
+        // The computer choosing rock is covered in a tie section, so ternary operator is used
+        computerChoice === "scissors" ? humanWin() : computerWin();
+        break;
+      case "paper":
+        computerChoice === "rock" ? humanWin() : computerWin();
+        break;
+      case "scissors":
+        computerChoice === "paper" ? humanWin() : computerWin();
+        break;
+      default:
+        console.log("Hm... your choice wasn't recognized.");
+    }
+  }
+
+  // Play 5 rounds
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+
+  console.log(
+    "End of the game! Total score:\nYOU: " +
+      humanScore +
+      "\nCOMPUTER: " +
+      computerScore
+  );
 }
+
+playGame();
