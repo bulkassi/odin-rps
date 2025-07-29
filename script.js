@@ -58,13 +58,6 @@ function playGame() {
     }
   }
 
-  // Play 5 rounds
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-
   console.log(
     "End of the game! Total score:\nYOU: " +
       humanScore +
