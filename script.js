@@ -17,14 +17,16 @@ function getComputerChoice() {
 }
 
 function playGame() {
-  playButtons.addEventListener("click", (e) => {
+  function moveMade(e) {
     let targetButton = e.target;
 
     if (targetButton.parentNode.id === "play-buttons") {
       // Since all play buttons, and only them, are children of play-buttons div
       playRound(targetButton.id, getComputerChoice());
     }
-  });
+  }
+
+  playButtons.addEventListener("click", moveMade);
 
   let humanScore = 0;
   let computerScore = 0;
@@ -47,14 +49,15 @@ function playGame() {
     updateScoreText();
 
     results.querySelector("#message").textContent =
-      "Victory! You've beaten the computer!";
+      "Victory! You've beaten the computer in the round!";
   }
 
   function computerWin() {
     computerScore++;
     updateScoreText();
 
-    results.querySelector("#message").textContent = "Oops... You lost!";
+    results.querySelector("#message").textContent =
+      "Oops... You lost the round!";
   }
 
   function playRound(humanChoice, computerChoice) {
@@ -79,6 +82,18 @@ function playGame() {
         break;
       default:
         console.log("Hm... your choice wasn't recognized.");
+    }
+
+    if (humanScore == 5 || computerScore == 5) {
+      playButtons.removeEventListener("click", moveMade);
+
+      if (humanScore == 5) {
+        results.querySelector("#message").textContent =
+          "FINISH! You won the game!";
+      } else {
+        results.querySelector("#message").textContent =
+          "FINISH! The computer prevails!";
+      }
     }
   }
 }
